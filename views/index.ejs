@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark">
+<head>
+    <link rel="icon" href="/images/artifact.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lore Of Artifacts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0/dist/themes/light.css" />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0/dist/shoelace.js"></script>
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+  <div class="bd-example m-0 border-0">
+        <!-- Меню сетів -->
+    <div class="header">
+      <button class="enter-button menu" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <%= lang === 'ua' ? 'Всі сети' : 'All sets' %>
+      </button>
+      <!-- about -->
+      <div class="about">
+        <button class="enter-button">
+        <%= lang === 'ua' ? 'About' : 'About' %>
+        </button>
+      </div> 
+      <!-- Меню вибору мови -->
+      <div class="language-switcher">
+        <button class="enter-button language" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <%= lang === 'ua' ? 'ua/eng' : 'ua/eng' %>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item <%= lang === 'ua' ? 'active' : '' %>" href="?lang=ua">Українська</a></li>
+          <li><a class="dropdown-item <%= lang === 'en' ? 'active' : '' %>" href="?lang=en">English</a></li>
+        </ul>
+      </div>
+      <!------>
+      <ul class="dropdown-menu">
+        <% Object.keys(artifactSets).forEach(function(setKey) { %>
+          <li>
+            <a class="dropdown-item <%= setKey === Object.keys(artifactSets)[currentSetIndex] ? 'active' : '' %>" href="/<%= setKey %>?lang=<%= lang %>" class="menu-img">
+              <img src="/images/id<%= artifactSets[setKey].artifacts[0].id %>.webp" alt="<%= artifactSets[setKey].name %>"> <%= artifactSets[setKey].name %>
+            </a>
+          </li>
+        <% }); %>
+      </ul>
+    </div>
+    
+    <!-- Меню артефактів -->
+    <div class="navigation">
+      <ul>
+        <% artifacts.forEach(function(artifact, index) { %>
+          <li class="list <%= index === 0 ? 'active' : '' %>">
+            <a href="#">
+              <span class="icon">
+                <img src="/images/id<%= artifact.id %>.webp" alt="<%= artifact.name %>" class="menu-icon">
+              </span>
+              <span class="circle"></span>
+            </a>
+          </li>
+        <% }); %>
+        <div class="indicator"></div>
+      </ul>
+    </div>
+
+    <!-- Контент артефактів -->
+    <% if (artifacts.length > 0) { %>
+      <div class="container">
+        <h2 class="text-center"><%= setTitle %></h2>
+        <div class="artifact-info-container">
+          <h3 class="artifact-name"><%= artifacts[0].name %></h3>
+          <p class="artifact-description-1"><%= artifacts[0].description[0] %></p>
+          <p class="artifact-description-2"><%= artifacts[0].description[1] %></p>
+        </div>
+      </div>
+    <% } %>
+    
+  </div>
+
+  <!-- Футер -->
+  <footer class="footer">
+    <% const setKeys = Object.keys(artifactSets); %>
+    <button class="dark" role="button" aria-label="Back" title="Back" 
+    <% if (currentSetIndex === 0) { %> disabled <% } %> 
+    onclick="window.location.href='/<%= setKeys[currentSetIndex - 1] %>?lang=<%= lang %>'">
+        <dotlottie-player id="Lottie_3" src="https://assets.codepen.io/9400490/arrow.lottie" background="transparent" aria-hidden="true"></dotlottie-player>
+    </button>
+
+    <% if (artifactSets[setKeys[currentSetIndex]] && artifactSets[setKeys[currentSetIndex]].trivia) { %>
+      <button class="custom-btn btn-12">
+        <span><%= lang === 'ua' ? 'Закрити' : 'Close' %></span>
+        <span><%= lang === 'ua' ? 'Додатково' : 'Trivia' %></span>
+      </button>
+    <% } %>
+
+    <button class="dark" role="button" aria-label="Next" title="Next" 
+    <% if (currentSetIndex === setKeys.length - 1) { %> disabled <% } %> 
+    onclick="window.location.href='/<%= setKeys[currentSetIndex + 1] %>?lang=<%= lang %>'">
+        <dotlottie-player id="Lottie_4" src="https://assets.codepen.io/9400490/arrow.lottie" background="transparent" aria-hidden="true"></dotlottie-player>
+    </button>
+  </footer>
+  
+  <!-- Вспливаюче вікно -->
+<div id="overlay" class="overlay hidden">
+    <div class="overlay-content">
+        <button id="close-overlay" class="close-overlay" aria-label="Close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <h3><%= lang === 'ua' ? 'Додаткова інформація' : 'Trivia' %></h3>
+        <p><%- artifactSets[setKeys[currentSetIndex]] && artifactSets[setKeys[currentSetIndex]].trivia ? artifactSets[setKeys[currentSetIndex]].trivia : (lang === 'ua' ? 'Немає додаткової інформації.' : 'No additional information.') %></p>
+    </div>
+</div>
+
+<!-- Вспливаюче вікно для About -->
+<div id="about-overlay" class="overlay hidden">
+  <div class="overlay-content">
+      <button id="close-about-overlay" class="close-overlay" aria-label="Close">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+      </button>
+      <h3><%= lang === 'ua' ? 'Про проєкт' : 'About the Project' %></h3>
+      <p><%- lang === 'ua' ? 'Я обожнюю Genshin Impact. А ще я обожнюю програмування. Одного разу, коли я задумався над тим, що величезний обсяг лору цієї гри схований в описі артефактів аж всередині архіву (місці, куди люди заходять в основному, що б дізнатись скільки вони вбили хілічурлів), я вирішив створити веб додаток, в якому можна зручно ознайомитись з величезною частиною прихованого лору.<br> Якщо у вас є зауваження чи пропозиції щодо додатку або є ідеї для іншого проєкту - пишіть мені в дискорд чи телеграм.<hr> <div class="text-container"><div class="text-center">Мої контакти:</div><div class="btn-group"><div class="custom-container"><a href="https://t.me/RetanoDD" class="custom-button">Телеграм</a></div><div class="custom-container"><a href="https://discord.gg/uAV2wS5Fhv" class="custom-button">Дискорд</a></div></div></div> <div class="text-container"><div class="text-center">Про мене:</div></div> <div class="centered-container"><div class="custom-container"><a href="https://retanoprox.github.io/Capstone-Project-2---one-page-resume/" class="custom-button">Візитка</a></div></div> <div class="text-container"><div class="text-center">Підтримати вітчизняного виробника:</div></div> <div class="btn-group"><div class="custom-container"><a href="https://send.monobank.ua/jar/UNkKWjuYV" target="_blank" rel="noopener noreferrer" class="custom-button">Моно банка</a></div><div class="custom-container"><a href="https://www.patreon.com/retano" class="custom-button">Патреон</a></div></div>' : 'I love Genshin Impact. And now I love to code. Once, I thought that a big amount of the lore of this game hidden in the description of the artifacts inside of the archive(the place where people mostly go to find out how many Hilichurls they’ve killed), I decided to create a web application where you can easily explore a large portion of hidden lore.<br> If you have any feedback or suggestions for the app or ideas for another project, feel free to message me on Discord or Telegram.<hr> <div class="text-container"><div class="text-center">My contacts:</div><div class="btn-group"><div class="custom-container"><a href="https://t.me/RetanoDD" class="custom-button">Telegram</a></div><div class="custom-container"><a href="https://discord.gg/uAV2wS5Fhv" class="custom-button">Discord</a></div></div></div> <div class="text-container"><div class="text-center">About me:</div></div> <div class="centered-container"><div class="custom-container"><a href="https://retanoprox.github.io/Capstone-Project-2---one-page-resume/" class="custom-button">Info card</a></div></div> <div class="text-container"><div class="text-center">Donate:</div></div> <div class="btn-group"><div class="custom-container"><a href="https://send.monobank.ua/jar/UNkKWjuYV" target="_blank" rel="noopener noreferrer" class="custom-button">Mono jar</a></div><div class="custom-container"><a href="https://www.patreon.com/retano" class="custom-button">Patreon</a></div></div>' %></p>
+
+
+  </div>
+</div>
+
+
+  <script>
+    window.artifacts = <%- JSON.stringify(artifacts) %>;
+    window.currentSetIndex = <%= currentSetIndex || 0 %>;
+    window.artifactSets = <%- JSON.stringify(artifactSets) %>;
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="scripts/main.js"></script>
+</body>
+</html>

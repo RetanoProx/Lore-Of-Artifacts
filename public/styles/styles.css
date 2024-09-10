@@ -1,0 +1,763 @@
+body {
+  background-image: url('/images/background1.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  background-position: center center; /* Центрування фону по вертикалі та горизонталі */
+  background-attachment: fixed;
+}
+
+/* Забезпечення 100% висоти екрану */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.header {
+  background-color: #000000;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0 0 5px;
+}
+
+/* Перемикач мови */
+.about {
+  margin-left: auto; /* Сдвигає меню вибору мови в праву сторону контейнера*/
+}
+
+
+.enter-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 18px;
+  gap: 25px;
+  
+  letter-spacing: 2px;
+  color: white;
+  cursor: pointer;
+  background: linear-gradient(to right, rgb(59, 59, 59), rgb(34, 34, 34));
+  position: relative;
+  border-radius: 8px;
+  border: 1px solid rgb(65, 65, 65);
+  transition-duration: 0.3s;
+  margin: 5px 5px 5px 0;
+  height: 38px;
+  width: 112px;
+}
+
+.enter-button:hover {
+  transition-duration: 0.3s;
+  box-shadow: 0px 0px 2px rgb(185, 185, 185), 0px 0px 10px rgb(97, 97, 97);
+}
+.enter-button:active {
+  transform: scale(0.95);
+  box-shadow: 0px 0px 2px rgb(185, 185, 185), 0px 0px 10px rgb(97, 97, 97);
+}
+
+.enter-button:focus {
+  box-shadow: 0px 0px 2px rgb(185, 185, 185), 0px 0px 10px rgb(97, 97, 97);
+  color: #29D9FF;
+}
+
+.dropdown-menu.show {
+  max-height: 90vh; /* Обмежує висоту вікна меню до 50% висотиы екрану */
+  overflow-y: auto; /* Додаємо вертикальну прокрутку */
+  width: auto; /* Вікно меню займает 80% ширини екрану */
+  cursor: pointer;
+}
+
+.language-switcher {
+  position: relative; /* Дає змогу коректно позиціювати випадаюче меню */
+}
+
+.language-switcher .dropdown-menu {
+  width: 112px !important; /* Примусове встановлення ширини */
+  min-width: 112px !important; /* Мінімальна ширина для запобігання змінам */
+  padding: 0; /* Прибираємо внутрішні відступи, якщо необхідно */
+  border-radius: 8px;
+}
+
+.language-switcher .dropdown-item {
+  padding: 8px 12px; 
+}
+
+
+/* Для стилізації смуги прокрутки */
+.dropdown-menu.show::-webkit-scrollbar-thumb {
+  background: #565e64; /* Колір бігунка */
+  border-radius: 4px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5); /* Внутрішня тінь */
+}
+
+.dropdown-menu.show::-webkit-scrollbar {
+  width: 15px;
+}
+
+.dropdown-menu.show::-webkit-scrollbar-track {
+  background: #000000; /* Колір доріжки */
+}
+
+.dropdown-item.active {
+  color: rgb(0, 0, 0);
+  background-color: #565e64;
+  font-weight: 500;
+}
+
+.navigation {
+  position: relative;
+  width: auto;
+  height: 80px;
+  background: linear-gradient(90deg,#29D9FF, #FFC2E1); 
+  background-size: 200% 200%; /* Збільшуємо розмір фону для плавної анімації */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding-top: 12px;
+  animation: gradientAnimation 8s ease infinite; /* Анімація зміни градієнта */
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+
+.navigation ul {
+  display: flex;
+  justify-content: space-between; /* Рівномірний розподіл пунктів меню */
+  align-items: center; /* Вирівнюємо іконки по центру вертикально */
+  width: auto;
+  padding: 0px;
+}
+
+.navigation ul li {
+  position: relative;
+  width: auto; /* Ширина визначатиметься вмістом (іконками) */
+  height: auto; /* Висота визначатиметься вмістом */
+  list-style: none;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navigation ul li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: auto; /* Тепер ширина і висота адаптуються до іконки */
+  height: auto;
+  text-align: center;
+  font-weight: 500;
+}
+
+
+.navigation ul li a .icon {
+  position: relative;
+  display: block;
+  line-height: 1; /* Видаляємо додатковий line-height */
+  font-size: 1.5em;
+  text-align: center;
+  transition: .5s;
+}
+
+.navigation ul li.active a .icon {
+  transform: translateY(-38px);
+}
+
+.menu-icon {
+  width: 90px; /* Збільшуємо розмір іконок до 50px */
+  height: 90px;
+  margin-left: 5px;
+}
+
+/* Indicator для активного елементу меню */
+.indicator {
+  position: absolute;
+  top: -62%;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(0deg, #FFC2E1, #29D9FF);
+  border: 6px solid #06021b;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .5s;
+}
+
+.indicator::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -22px;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border-top-right-radius: 20px;
+  box-shadow: 1px -10px 0 #06021b;
+}
+
+.indicator::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -22px;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border-top-left-radius: 20px;
+  box-shadow: -1px -10px 0 #06021b;
+}
+
+/* Позиціонування indicator для кожного елемента */
+.navigation ul li:nth-child(1).active ~ .indicator {
+  transform: translateX(calc(95px * 0));
+}
+
+.navigation ul li:nth-child(2).active ~ .indicator {
+  transform: translateX(calc(95px * 1));
+}
+
+.navigation ul li:nth-child(3).active ~ .indicator {
+  transform: translateX(calc(95px * 2));
+}
+
+.navigation ul li:nth-child(4).active ~ .indicator {
+  transform: translateX(calc(95px * 3));
+}
+
+.navigation ul li:nth-child(5).active ~ .indicator {
+  transform: translateX(calc(95px * 4));
+}
+
+/* Стилі для зображень артефактів */
+.artifact-img {
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+
+.artifact-img:hover {
+  transform: scale(1.1);
+}
+
+.artifact-img.selected {
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+/* Сітка для артефактів */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.grid-item {
+  text-align: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+p {
+  margin: 0;
+}
+
+h2 {
+  padding: 1rem;
+  color: white;
+}
+
+h3 {
+  text-align: center;
+}
+
+#overlay > div > p {
+  margin: 0 10px 10px 10px;
+}
+
+#overlay > div > ul > li {
+  margin-bottom: 8px;
+}
+
+.dropdown-menu .dropdown-item img {
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* Стилі для контейнера з описом артефактів */
+.artifact-info-container {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.7); /* Напівпрозорий фон контейнера */
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  max-width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column; /* Розташовуємо дочірні елементи вертикально */
+  max-height: 73vh
+}
+
+.artifact-info-container .artifact-name {
+  margin-bottom: 15px;
+  font-size: 1.5em;
+}
+
+.artifact-description-1 {
+  background-color: black; /* Чорне тло для першої частини опису */
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.artifact-description-2 {
+  background-color: rgba(0, 0, 0, 0.5); /* Напівпрозоре тло для другої частини опису */
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 4px;
+  flex-grow: 1; /* Дозволяє контейнеру опису 2 рости і займати простір, що залишився */
+  overflow-y: auto; /* Смуга прокрутки по вертикалі */
+}
+
+/* Футер */
+footer {
+  height: 50px;
+  background: linear-gradient(90deg,#29D9FF, #FFC2E1); 
+  background-size: 200% 200%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10 20px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 5px;
+  
+}
+
+/* Стилі для спливаючого вікна */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.overlay-content {
+  background: #000000; /* Чорний фон */
+  color: white; /* Білий текст */
+  padding: 8px;
+  border-radius: 8px;
+  max-width: 600px;
+  max-height: 76vh;
+  border: 1px solid #29D9FF;
+  position: relative;
+  overflow-y: auto;
+  margin: 12px;
+  z-index: 10; /* Для коректного відображення над іншими елементами */
+}
+
+.overlay-content .custom-btn:hover {
+  box-shadow: 3px 3px 8px 2px #3f3f3f inset;
+}
+
+.close-overlay {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.close-overlay:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.close-overlay svg {
+  width: 16px;
+  height: 16px;
+  stroke: #ff6b6b; /* Колір лінії SVG */
+}
+
+.close-overlay:hover svg {
+  stroke: #ff4c4c;
+}
+
+
+.hidden {
+  display: none;
+}
+
+.custom-btn {
+  width: 130px;
+  height: 40px;
+  color: #000000;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+              7px 7px 20px 0px rgba(0,0,0,.1),
+              4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+.btn-12 {
+  position: relative;
+  right: 20px;
+  bottom: 20px;
+  border: none;
+  box-shadow: none;
+  width: 130px;
+  height: 40px;
+  line-height: 42px;
+  perspective: 230px;
+}
+
+.btn-12 span {
+  background: linear-gradient(0deg, #29D9FF 0%, #2798FE 100%);
+  display: block;
+  position: absolute;
+  width: 130px;
+  height: 40px;
+  box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+              7px 7px 20px 0px rgba(0,0,0,.1),
+              4px 4px 5px 0px rgba(0,0,0,.1);
+  border-radius: 5px;
+  margin: 0;
+  text-align: center;
+  box-sizing: border-box;
+  transition: all .3s;
+}
+
+.btn-12 span:nth-child(1) {
+  box-shadow: -7px -7px 20px 0px rgba(255, 255, 255, 0),  /* Сірий фон для неактивних кнопок */ 
+              -4px -4px 5px 0px rgba(255, 255, 255, 0),   /* Сірий фон для неактивних кнопок */ 
+              7px 7px 20px 0px #0002,
+              4px 4px 5px 0px #0001;
+  transform: rotateX(90deg);
+  transform-origin: 50% 50% -20px;
+}
+
+.btn-12 span:nth-child(2) {
+  transform: rotateX(0deg);
+  transform-origin: 50% 50% -20px;
+}
+
+.btn-12.active span:nth-child(1) {
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+              7px 7px 20px 0px rgba(0, 0, 0, .1),
+              4px 4px 5px 0px rgba(0, 0, 0, .1);
+  transform: rotateX(0deg);
+}
+
+.btn-12.active span:nth-child(2) {
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+              7px 7px 20px 0px rgba(0, 0, 0, .1),
+              4px 4px 5px 0px rgba(0, 0, 0, .1);
+  color: transparent;
+  transform: rotateX(-90deg);
+}
+
+/* кнопки назад та вперед */
+.dark {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  margin: 0;
+  background: linear-gradient(0deg, #29D9FF 0%, #2798FE 100%);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+  box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+              7px 7px 20px 0px rgba(0,0,0,.1),
+              4px 4px 5px 0px rgba(0,0,0,.1);
+}
+
+.dark:hover {
+  box-shadow: 3px 3px 8px 2px  #3f3f3f inset;
+}
+
+#Lottie_3, #Lottie_4 {
+  transform: scale(0.6);
+}
+
+#Lottie_4 {
+  transform: scale(0.6) rotate(180deg);
+}
+
+.footer button:active {
+  transform: scale(0.9);
+}
+
+@media (hover: hover) {
+  .solid-2:hover {
+    box-shadow: 3px 3px 8px 2px #3f3f3f inset;
+  }
+}
+
+.footer button:disabled {
+  background-color: #808080;
+  box-shadow: 3px 3px 8px 2px #3f3f3f inset;
+  transform: scale(1);
+  cursor: not-allowed;
+}
+/* кнопки в About */
+hr {
+  margin: 16px 0 5px 0;
+}
+
+.custom-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px; /* Ширина кнопки */
+  height: 24px; /* Висота кнопки */
+  border-radius: 0.3em;
+  border: none;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 2px 2px 3px #000000b4;
+  transition: all 0.4s ease;
+}
+
+.custom-container {
+  display: inline-block;
+  position: relative;
+  padding: 2px;
+  background: linear-gradient(90deg, #03a9f4, #f441a5);
+  border-radius: 0.5em;
+  transition: all 0.4s ease;
+}
+
+.custom-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  border-radius: 0.9em;
+  z-index: -10;
+  filter: blur(0);
+  transition: filter 0.4s ease;
+}
+
+.custom-container:hover::before {
+  background: linear-gradient(90deg, #03a9f4, #f441a5);
+  filter: blur(0.8em);
+}
+
+.custom-container:active::before {
+  filter: blur(0.2em);
+}
+
+.text-container {
+  margin-bottom: 10px; /* Відступ знизу поміж блоками тексту та кнопками */
+}
+
+.text-center {
+  text-align: center; /* Вирівнювання тексту по центру */
+  margin-bottom: 5px; /* Відступ знизу тексту */
+}
+
+.btn-group {
+  display: flex;
+  gap: 10px; /* Зазор між кнопками по горизонталі */
+  justify-content: center; /* Центрування кнопок */
+}
+
+.centered-container {
+  display: flex;
+  justify-content: center; /* Центрування кнопки */
+  margin-bottom: 10px; /* Відступ знизу */
+}
+/* ----------------------- */
+
+@media (min-width: 993px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center
+    
+    
+  }
+  .artifact-info-container {
+    max-width: 600px;
+    max-height: 70vh;
+  }
+}
+
+@media (max-width: 903px) {
+  .header {
+    height: 93px;
+  }
+}
+
+
+@media (max-width: 576px) {
+
+h2.text-center {
+  margin: 0px;
+}
+
+  .indicator {
+    top: -54%;
+    width: 4.3125rem;
+    height: 4.3125rem;
+  }
+
+  .menu-icon {
+    width: 4rem; /* Збільшуємо розмір іконок до 50px */
+    height: 4rem;
+    margin-left: 0.2rem;
+  }
+
+  .navigation ul li.active a .icon {
+    transform: translateY(-1.875rem);
+  }
+
+  .navigation {
+    height: 4rem;
+  }
+
+  .header {
+    height: 5rem;
+    
+  }
+
+  .text-center {
+    margin: 0 0 5px 0;
+  }
+
+  /* Позиціонування indicator для кожного елемента */
+.navigation ul li:nth-child(1).active ~ .indicator {
+  transform: translateX(calc(4.2rem * 0));
+}
+
+.navigation ul li:nth-child(2).active ~ .indicator {
+  transform: translateX(calc(4.2rem * 1));
+}
+
+.navigation ul li:nth-child(3).active ~ .indicator {
+  transform: translateX(calc(4.2rem * 2));
+}
+
+.navigation ul li:nth-child(4).active ~ .indicator {
+  transform: translateX(calc(4.2rem * 3));
+}
+
+.navigation ul li:nth-child(5).active ~ .indicator {
+  transform: translateX(calc(4.2rem * 4));
+}
+}
+
+@media (max-width: 460px) {
+
+  .artifact-info-container {
+    max-height: 65vh;
+  }
+}
+
+@media (max-width: 420px) {
+  h2 {
+    font-size: 23px;
+    padding: 10px;
+    }
+    
+  body > div > div.container > div.artifact-info-container > h3 {
+    font-size: 20px;
+  }
+}
+
+.artifact-info-container {
+  max-height: 71vh;
+}
+
+@media (max-width: 376px) {
+  .indicator {
+    top: -46%;
+    width: 3.7rem;
+    height: 3.7rem;
+  }
+
+  .menu-icon {
+    width: 3rem; /* Збільшуємо розмір іконок до 50px */
+    height: 3rem;
+    margin-left: 0.3rem;
+  }
+
+  /* Позиціонування indicator для кожного елемента */
+.navigation ul li:nth-child(1).active ~ .indicator {
+  transform: translateX(calc(3.3rem * 0));
+}
+
+.navigation ul li:nth-child(2).active ~ .indicator {
+  transform: translateX(calc(3.3rem * 1));
+}
+
+.navigation ul li:nth-child(3).active ~ .indicator {
+  transform: translateX(calc(3.3rem * 2));
+}
+
+.navigation ul li:nth-child(4).active ~ .indicator {
+  transform: translateX(calc(3.3rem * 3));
+}
+
+.navigation ul li:nth-child(5).active ~ .indicator {
+  transform: translateX(calc(3.3rem * 4));
+}
+}
+
+@media (max-width: 393px) {
+
+  .artifact-info-container {
+    max-height: 67vh;
+  }
+}
