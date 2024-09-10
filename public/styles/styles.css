@@ -279,6 +279,14 @@ p {
   margin: 0;
 }
 
+.ch2 {
+  margin: -24px 0 -24px 0;
+}
+
+.ch1, .ch2, .ch3 {
+  text-indent: 1em; /* Устанавливает отступ перед первым словом на 2 символа */
+}
+
 h2 {
   padding: 1rem;
   color: white;
@@ -382,7 +390,7 @@ footer {
   padding: 8px;
   border-radius: 8px;
   max-width: 600px;
-  max-height: 76vh;
+  max-height: 85vh;
   border: 1px solid #29D9FF;
   position: relative;
   overflow-y: auto;
@@ -550,7 +558,7 @@ footer {
 }
 /* кнопки в About */
 hr {
-  margin: 16px 0 5px 0;
+  margin: 5px 0 5px 0;
 }
 
 .custom-button {
