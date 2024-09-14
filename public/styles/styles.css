@@ -642,6 +642,12 @@ hr {
   }
 }
 
+@media (min-width: 576px) {
+  .overlay-content {
+    min-width: 50vh;
+  }
+}
+
 @media (max-width: 903px) {
   .header {
     height: 93px;
