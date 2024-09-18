@@ -722,7 +722,7 @@ h2.text-center {
 @media (max-width: 460px) {
 
   .artifact-info-container {
-    max-height: 62vh;
+    max-height: 59vh;
   }
 }
 
@@ -735,10 +735,6 @@ h2.text-center {
   body > div > div.container > div.artifact-info-container > h3 {
     font-size: 20px;
   }
-}
-
-.artifact-info-container {
-  max-height: 68vh;
 }
 
 @media (max-width: 376px) {
@@ -779,6 +775,6 @@ h2.text-center {
 @media (max-width: 393px) {
 
   .artifact-info-container {
-    max-height: 64vh;
+    max-height: 57vh;
   }
 }
