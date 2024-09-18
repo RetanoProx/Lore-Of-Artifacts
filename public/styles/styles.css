@@ -45,6 +45,7 @@ html, body {
   margin: 5px 5px 5px 0;
   height: 38px;
   width: 112px;
+  white-space: nowrap;
 }
 
 .enter-button:hover {
@@ -652,6 +653,12 @@ hr {
   .header {
     height: 93px;
   }
+  .artifact-info-container {
+    padding: 10px;
+  }
+  .artifact-info-container .artifact-name {
+    margin-bottom: 10px;
+  }
 }
 
 
@@ -715,7 +722,7 @@ h2.text-center {
 @media (max-width: 460px) {
 
   .artifact-info-container {
-    max-height: 65vh;
+    max-height: 62vh;
   }
 }
 
@@ -731,7 +738,7 @@ h2.text-center {
 }
 
 .artifact-info-container {
-  max-height: 71vh;
+  max-height: 68vh;
 }
 
 @media (max-width: 376px) {
@@ -772,6 +779,6 @@ h2.text-center {
 @media (max-width: 393px) {
 
   .artifact-info-container {
-    max-height: 67vh;
+    max-height: 64vh;
   }
 }
