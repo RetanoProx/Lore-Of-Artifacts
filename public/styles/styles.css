@@ -63,10 +63,11 @@ html, body {
 }
 
 .dropdown-menu.show {
-  max-height: 75vh; /* Обмежує висоту вікна меню до 50% висотиы екрану */
+  max-height: 90vh; /* Обмежує висоту вікна меню до 50% висотиы екрану */
   overflow-y: auto; /* Додаємо вертикальну прокрутку */
   width: auto; /* Вікно меню займает 80% ширини екрану */
   cursor: pointer;
+  
 }
 
 .language-switcher {
@@ -658,6 +659,9 @@ hr {
   }
   .artifact-info-container .artifact-name {
     margin-bottom: 10px;
+  }
+  .dropdown-menu.show {
+    padding-bottom: 120px;
   }
 }
 
