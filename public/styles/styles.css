@@ -629,24 +629,25 @@ hr {
   margin-bottom: 10px; /* Відступ знизу */
 }
 /* ----------------------- */
-
-@media (min-width: 993px) {
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center
-    
-    
-  }
+@media (min-width: 1900px) {
   .artifact-info-container {
     max-width: 600px;
     max-height: 70vh;
   }
 }
 
-@media (min-width: 576px) {
-  .overlay-content {
-    min-width: 50vh;
+@media (max-width: 1800px) {
+  .artifact-info-container {
+    max-width: 600px;
+    max-height: 60vh;
+  }
+}
+
+@media (min-width: 993px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center
   }
 }
 
@@ -665,13 +666,16 @@ hr {
   }
 }
 
+@media (min-width: 576px) {
+  .overlay-content {
+    min-width: 50vh;
+  }
+}
 
 @media (max-width: 576px) {
-
 h2.text-center {
   margin: 0px;
 }
-
   .indicator {
     top: -54%;
     width: 4.3125rem;
